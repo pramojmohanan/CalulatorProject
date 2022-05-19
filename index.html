@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+      rel="stylesheet"
+    />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="calculator">
+        <div class="display">
+          <p id="demo"></p>
+        </div>
+        <div class="buttons">
+          <div class="buttonRow">
+            <div
+              onclick="inputNumbers(this.id) "
+              id="seven"
+              class="buttonColunm"
+            >
+              7
+            </div>
+            <div
+              onclick="inputNumbers(this.id) "
+              id="four"
+              class="buttonColunm"
+            >
+              4
+            </div>
+            <div onclick="inputNumbers(this.id) " id="one" class="buttonColunm">
+              1
+            </div>
+            <div
+              onclick="inputNumbers(this.id) "
+              id="zero"
+              class="buttonColunm"
+            >
+              0
+            </div>
+          </div>
+          <div class="buttonRow">
+            <div
+              onclick="inputNumbers(this.id) "
+              id="eight"
+              class="buttonColunm"
+            >
+              8
+            </div>
+            <div
+              onclick="inputNumbers(this.id) "
+              id="five"
+              class="buttonColunm"
+            >
+              5
+            </div>
+            <div onclick="inputNumbers(this.id) " id="two" class="buttonColunm">
+              2
+            </div>
+            <div onclick="inputNumbers(this.id) " id="dot" class="buttonColunm">
+              .
+            </div>
+          </div>
+          <div class="buttonRow">
+            <div
+              onclick="inputNumbers(this.id) "
+              id="nine"
+              class="buttonColunm"
+            >
+              9
+            </div>
+            <div onclick="inputNumbers(this.id) " id="six" class="buttonColunm">
+              6
+            </div>
+            <div
+              onclick="inputNumbers(this.id) "
+              id="three"
+              class="buttonColunm"
+            >
+              3
+            </div>
+            <div id="equals" onclick="getItems()" class="buttonColunm">
+              <strong>=</strong>
+            </div>
+          </div>
+          <div class="buttonRow">
+            <div
+              onclick="inputOperators(this.id)"
+              id="division"
+              class="buttonColunm"
+            >
+              /
+            </div>
+            <div
+              onclick="inputOperators(this.id)"
+              id="multiplication"
+              class="buttonColunm"
+            >
+              x
+            </div>
+            <div
+              onclick="inputOperators(this.id)"
+              id="subraction"
+              class="buttonColunm"
+            >
+              -
+            </div>
+            <div
+              onclick="inputOperators(this.id)"
+              id="addition"
+              class="buttonColunm"
+            >
+              +
+            </div>
+          </div>
+        </div>
+        <div class="footer">
+          <h3>Calculator</h3>
+          <div onclick="refresh()" class="clear">
+            <h5>AC</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    let values;
+    let arrayValues;
+    let newValues = [];
+    let operators = [];
+    let sum;
+    let value;
+    let id;
+    function inputNumbers(buttonId) {
+      id = buttonId;
+      value = document.getElementById(buttonId).innerHTML;
+      document.getElementById("demo").innerHTML += value;
+    }
+    function inputOperators(buttoId) {
+      if (
+        value !== " + " &&
+        value !== " - " &&
+        value !== " x " &&
+        value !== " / " &&
+        value !== undefined
+      ) {
+        console.log(value);
+        value = document.getElementById(buttoId).innerHTML;
+        document.getElementById("demo").innerHTML += value;
+      }
+    }
+    function getItems() {
+      values = document.getElementById("demo").innerHTML;
+      console.log(values);
+      arrayValues = values.split(" ");
+
+      for (let i = 0; i < arrayValues.length; i++) {
+        if (arrayValues[i] == "+") {
+          sum = parseFloat(arrayValues[i - 1]) + parseFloat(arrayValues[i + 1]);
+          arrayValues[i + 1] = sum;
+        } else if (arrayValues[i] == "-") {
+          sum = parseFloat(arrayValues[i - 1]) - parseFloat(arrayValues[i + 1]);
+          arrayValues[i + 1] = sum;
+        } else if (arrayValues[i] == "x") {
+          sum = parseFloat(arrayValues[i - 1]) * parseFloat(arrayValues[i + 1]);
+          arrayValues[i + 1] = sum;
+        } else if (arrayValues[i] == "/") {
+          sum = parseFloat(arrayValues[i - 1]) / parseFloat(arrayValues[i + 1]);
+          arrayValues[i + 1] = sum;
+        }
+        console.log(sum);
+        document.getElementById("demo").innerHTML = sum;
+      }
+    }
+    function refresh() {
+      document.location.reload(true);
+    }
+  </script>
+</html>
