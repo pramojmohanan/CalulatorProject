@@ -34,10 +34,10 @@
                     <div id="equals" onclick="getItems()"  class="buttonColunm"><strong>=</strong></div>
                 </div>
                 <div class="buttonRow">
-                    <div id="division" onclick="inputNumbers(this.id)" class="buttonColunm"> / </div>
-                    <div id="multiplication" onclick="inputNumbers(this.id)" class="buttonColunm"> x </div>
-                    <div id="subraction" onclick="inputNumbers(this.id)" class="buttonColunm"> - </div>
-                    <div id="addition" onclick="inputNumbers(this.id) " class="buttonColunm"> + </div>
+                    <div onclick="inputOperators(this.id)" id="division"  class="buttonColunm"> / </div>
+                    <div onclick="inputOperators(this.id)" id="multiplication" class="buttonColunm"> x </div>
+                    <div onclick="inputOperators(this.id)" id="subraction"  class="buttonColunm"> - </div>
+                    <div onclick="inputOperators(this.id)" id="addition"  class="buttonColunm"> + </div>
                 </div>
             </div>
             <div class="footer">
@@ -55,10 +55,23 @@
   let newValues=[]
   let operators=[]
   let sum
+  let value
+  let id;
     function inputNumbers(buttonId) {
-        let value = document.getElementById(buttonId).innerHTML
+       id= buttonId 
+         value = document.getElementById(buttonId).innerHTML
         document.getElementById("demo").innerHTML += value;
     }
+    function inputOperators(buttoId){
+        if (value!==" + " &&value!== " - " && value!== " x " && value!== " / " && value!==undefined){
+            console.log(value);
+            value = document.getElementById(buttoId).innerHTML
+            document.getElementById("demo").innerHTML += value;
+        }
+        
+    }
+
+    
     function getItems(){
         values = document.getElementById("demo").innerHTML
         console.log(values);
@@ -66,7 +79,7 @@
        
         for (let i = 0 ;i <arrayValues.length;i++){
           
-           if(arrayValues[i]=="+"){
+        if(arrayValues[i]=="+"){
                 sum = parseFloat(arrayValues[i-1]) + parseFloat(arrayValues[i+1])
                 arrayValues[i+1]=sum
         }
@@ -79,7 +92,7 @@
         }else if(arrayValues[i]=="/"){
             sum =  parseFloat(arrayValues[i-1]) / parseFloat(arrayValues[i+1])
             arrayValues[i+1]=sum
-        }  
+        } 
         console.log(sum);
         document.getElementById("demo").innerHTML=sum
         }
